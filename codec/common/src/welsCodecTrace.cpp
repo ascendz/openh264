@@ -48,6 +48,7 @@
 
 static void welsStderrTrace (void* ctx, int level, const char* string) {
   fprintf (stderr, "%s\n", string);
+  printf ("%s\n", string);
 }
 
 welsCodecTrace::welsCodecTrace() {
