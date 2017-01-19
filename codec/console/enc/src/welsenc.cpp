@@ -716,7 +716,9 @@ int FillSpecificParameters (SEncParamExt& sParam) {
 
   return 0;
 }
-
+static void OutputCallbackTrace(void* ctx, int level, const char* string) {
+	printf("callback %s\n", string);
+}
 int ProcessEncoding (ISVCEncoder* pPtrEnc, int argc, char** argv, bool bConfigFile) {
   int iRet = 0;
 
@@ -786,11 +788,12 @@ int ProcessEncoding (ISVCEncoder* pPtrEnc, int argc, char** argv, bool bConfigFi
     goto INSIDE_MEM_FREE;
   }
   pPtrEnc->SetOption (ENCODER_OPTION_TRACE_LEVEL, &g_LevelSetting);
+  WelsTraceCallback pfLog = OutputCallbackTrace;
+  pPtrEnc->SetOption(ENCODER_OPTION_TRACE_CALLBACK, &pfLog);
   //finish reading the configurations
   iSourceWidth = pSrcPic->iPicWidth;
   iSourceHeight = pSrcPic->iPicHeight;
   kiPicResSize = iSourceWidth * iSourceHeight * 3 >> 1;
-
   pYUV = new uint8_t [kiPicResSize];
   if (pYUV == NULL) {
     iRet = 1;
