@@ -386,7 +386,7 @@ int CWelsH264SVCEncoder::EncodeFrame (const SSourcePicture* kpSrcPic, SFrameBSIn
              "CWelsH264SVCEncoder::EncodeFrame() not succeed, err=%d", kiEncoderReturn);
     return kiEncoderReturn;
   }
-
+  printf("Openh264:::::::::::::::::::::::::::::::::::::::::OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOThrdNum %d \n", m_pEncContext->iActiveThreadsNum);
 #ifdef REC_FRAME_COUNT
   ++ m_uiCountFrameNum;
   WelsLog (&m_pWelsTrace->m_sLogCtx, WELS_LOG_INFO,
