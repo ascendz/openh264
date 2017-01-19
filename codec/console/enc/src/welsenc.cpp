@@ -756,7 +756,10 @@ int ProcessEncoding (ISVCEncoder* pPtrEnc, int argc, char** argv, bool bConfigFi
   memset (&fs.sRecFileName[0][0], 0, sizeof (fs.sRecFileName));
 
   FillSpecificParameters (sSvcParam);
+  WelsTraceCallback pfLog = OutputCallbackTrace;
+  pPtrEnc->SetOption(ENCODER_OPTION_TRACE_CALLBACK, &pfLog);
   pSrcPic = new SSourcePicture;
+
   if (pSrcPic == NULL) {
     iRet = 1;
     goto INSIDE_MEM_FREE;
@@ -788,8 +791,7 @@ int ProcessEncoding (ISVCEncoder* pPtrEnc, int argc, char** argv, bool bConfigFi
     goto INSIDE_MEM_FREE;
   }
   pPtrEnc->SetOption (ENCODER_OPTION_TRACE_LEVEL, &g_LevelSetting);
-  WelsTraceCallback pfLog = OutputCallbackTrace;
-  pPtrEnc->SetOption(ENCODER_OPTION_TRACE_CALLBACK, &pfLog);
+  
   //finish reading the configurations
   iSourceWidth = pSrcPic->iPicWidth;
   iSourceHeight = pSrcPic->iPicHeight;
