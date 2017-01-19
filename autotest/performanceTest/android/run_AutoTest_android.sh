@@ -114,6 +114,7 @@ for dev in $devices; do
         [ "#$pid" != "#" ] && $ADB -s $dev shell kill $pid >/dev/null
         $ADB -s $dev logcat -c
         $ADB -s $dev logcat |grep ${log_grep_params} >>${report_file}_${dev}_${rand}.log &
+	$ADB -s $dev logcat >>${report_file}_${dev}_${rand}_EncTrace.log &
         $ADB -s $dev shell am start -n ${apk_main}
         # check whetehr the app is finished every 2 sec
         for (( ; ; )); do
@@ -143,6 +144,7 @@ for dev in $devices; do
     [ "#$pid" != "#" ] && $ADB -s $dev shell kill $pid >/dev/null
     $ADB -s $dev logcat -c
     $ADB -s $dev logcat |grep ${log_grep_params} >${report_file}_${dev}_${rand}.log &
+    $ADB -s $dev logcat >>${report_file}_${dev}_${rand}_EncTrace.log &
     $ADB -s $dev shell am start -n ${apk_main}
     # check whetehr the app is finished every 2 sec
     for (( ; ; )); do
