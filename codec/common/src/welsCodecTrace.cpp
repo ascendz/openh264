@@ -43,12 +43,17 @@
 
 #include "welsCodecTrace.h"
 #include "utils.h"
+#include <fstream>
 
-
+using namespace std;
 
 static void welsStderrTrace (void* ctx, int level, const char* string) {
-  fprintf (stderr, "%s\n", string);
-  printf ("%s\n", string);
+	fprintf(stderr, "%s\n", string);
+	ofstream f("//Users//jenkins//trace.txt",ios::app);
+	f << '/n';
+	f << string;
+	f << '/n';
+	f.close();
 }
 
 welsCodecTrace::welsCodecTrace() {
