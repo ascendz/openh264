@@ -43,7 +43,7 @@
 
 #include "welsCodecTrace.h"
 #include "utils.h"
-#include <fstream>
+#include <fstream.h>
 
 using namespace std;
 
